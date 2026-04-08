@@ -1,0 +1,15 @@
+
+; Test some comments
+
+.ORIG x3000
+
+LABEL ADD R3, R2, #0
+   NOT R3, R3 
+   BRn DONE
+
+DONE
+
+DATA .FILL x3000
+DATA2 .STRINGZ "Some thing here."
+
+.END
