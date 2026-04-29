@@ -1,6 +1,7 @@
-(identifier) @label
+(identifier) @function
 (string) @string
-(directive) @keyword.directive
+(directive) @function.macro
 (opcode) @keyword.operator
 (comment) @comment
 (number_literal) @number
+(register) @variable.builtin

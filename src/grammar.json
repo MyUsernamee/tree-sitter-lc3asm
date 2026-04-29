@@ -21,8 +21,8 @@
             ]
           },
           {
-            "type": "STRING",
-            "value": "\n"
+            "type": "PATTERN",
+            "value": "\\n+"
           }
         ]
       }
@@ -60,8 +60,16 @@
                       "name": "opcode"
                     },
                     {
-                      "type": "SYMBOL",
-                      "name": "_operand"
+                      "type": "CHOICE",
+                      "members": [
+                        {
+                          "type": "SYMBOL",
+                          "name": "_operand"
+                        },
+                        {
+                          "type": "BLANK"
+                        }
+                      ]
                     },
                     {
                       "type": "REPEAT",
@@ -110,7 +118,8 @@
     },
     "directive": {
       "type": "PATTERN",
-      "value": "\\.\\w+"
+      "value": "\\.\\w+",
+      "flags": "i"
     },
     "comment": {
       "type": "PATTERN",
@@ -215,54 +224,66 @@
     },
     "register": {
       "type": "PATTERN",
-      "value": "R\\d"
+      "value": "R\\d",
+      "flags": "i"
     },
     "opcode": {
       "type": "CHOICE",
       "members": [
         {
-          "type": "STRING",
-          "value": "ADD"
-        },
-        {
-          "type": "STRING",
-          "value": "AND"
-        },
-        {
-          "type": "STRING",
-          "value": "NOT"
+          "type": "PATTERN",
+          "value": "ADD",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "ST[IR]?"
+          "value": "AND",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "LD[(EA)IR]?"
+          "value": "NOT",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "BR[ZNPznp]?"
+          "value": "ST[IR]?",
+          "flags": "i"
         },
         {
           "type": "PATTERN",
-          "value": "JSRR?"
+          "value": "LD[(EA)IR]?",
+          "flags": "i"
         },
         {
-          "type": "STRING",
-          "value": "TRAP"
+          "type": "PATTERN",
+          "value": "BR[ZNPznp]?",
+          "flags": "i"
         },
         {
-          "type": "STRING",
-          "value": "HALT"
+          "type": "PATTERN",
+          "value": "JSRR?",
+          "flags": "i"
         },
         {
-          "type": "STRING",
-          "value": "GETS"
+          "type": "PATTERN",
+          "value": "TRAP",
+          "flags": "i"
         },
         {
-          "type": "STRING",
-          "value": "PUTS"
+          "type": "PATTERN",
+          "value": "HALT",
+          "flags": "i"
+        },
+        {
+          "type": "PATTERN",
+          "value": "GETS",
+          "flags": "i"
+        },
+        {
+          "type": "PATTERN",
+          "value": "PUTS",
+          "flags": "i"
         }
       ]
     },
@@ -274,7 +295,7 @@
   "extras": [
     {
       "type": "PATTERN",
-      "value": "\\s"
+      "value": "[ \\t]"
     }
   ],
   "conflicts": [],
