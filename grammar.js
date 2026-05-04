@@ -9,9 +9,9 @@
 
 export default grammar({
   name: "lc3asm",
-  extras : $ => [/[ \t]/],
+  extras : $ => [/[ \t]/, $.comment],
   rules: {
-    source_file: $ => repeat(seq(choice($.statement, $.comment), /\n+/)),
+    source_file: $ => repeat(seq(optional($.statement), /\n+/)),
     statement: $ => choice(
       $.identifier, 
       seq(
@@ -27,10 +27,11 @@ export default grammar({
     _operand: $ => choice(
       $.register,
       $.identifier,
-      $.number_literal,
+      $.base_literal,
     ),
-    _literal: $ => choice($.number_literal, $.string),
-    number_literal: $ => /[x#]\d+/,
+    _literal: $ => choice($.base_literal, $.number_literal, $.string, $.identifier),
+    base_literal: $ => seq(/[x#]/, $.number_literal),
+    number_literal: $ => /-?\d+/,
     string: $ => choice(
       seq('"', repeat(choice('\\"', /[^"]/)), '"'),
       seq("'", repeat(choice("\\'", /[^']/)), "'"),
@@ -42,12 +43,13 @@ export default grammar({
       /NOT/i,
       /ST[IR]?/i,
       /LD[(EA)IR]?/i,
-      /BR[ZNPznp]?/i,
+      /BR[ZNPznp]+?/i,
       /JSRR?/i,
       /TRAP/i,
       /HALT/i,
       /GETS/i,
-      /PUTS/i
+      /PUTS/i,
+      /JMP/i
     ),
     identifier: $ => /\w+/,
   }
