@@ -29,7 +29,7 @@ export default grammar({
       $.identifier,
       $.base_literal,
     ),
-    _literal: $ => choice($.base_literal, $.number_literal, $.string_literal, $.identifier),
+    _literal: $ => choice($.base_literal, $.number_literal, $.string_literal),
     base_literal: $ => seq(/[x#]/, $.number_literal),
     number_literal: $ => /-?\d+/,
     string_literal: $ => token(choice(
