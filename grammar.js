@@ -17,7 +17,7 @@ export default grammar({
       seq(
         optional($.identifier),
         choice(
-          seq($.opcode, optional($._operand), repeat(seq(',', $._operand))),
+          seq($.opcode, optional($._operand), optional(seq(',', $._operand)), optional(seq(',', $._operand))),
           seq($.directive, optional($._literal))
         )
       )
@@ -32,10 +32,10 @@ export default grammar({
     _literal: $ => choice($.base_literal, $.number_literal, $.string_literal, $.identifier),
     base_literal: $ => seq(/[x#]/, $.number_literal),
     number_literal: $ => /-?\d+/,
-    string_literal: $ => choice(
+    string_literal: $ => token(choice(
       seq('"', repeat(choice('\\"', /[^"]/)), '"'),
       seq("'", repeat(choice("\\'", /[^']/)), "'"),
-    ) ,
+    )),
     register: $ => /R\d/i,
     opcode: $ => choice(
       /ADD/i,

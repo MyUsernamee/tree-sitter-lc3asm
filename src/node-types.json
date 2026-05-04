@@ -75,28 +75,7 @@
     }
   },
   {
-    "type": "string_literal",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "\"",
-    "named": false
-  },
-  {
-    "type": "'",
-    "named": false
-  },
-  {
     "type": ",",
-    "named": false
-  },
-  {
-    "type": "\\\"",
-    "named": false
-  },
-  {
-    "type": "\\'",
     "named": false
   },
   {
@@ -118,6 +97,10 @@
   },
   {
     "type": "register",
+    "named": true
+  },
+  {
+    "type": "string_literal",
     "named": true
   }
 ]
