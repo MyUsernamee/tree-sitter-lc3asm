@@ -154,7 +154,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "string"
+          "name": "string_literal"
         },
         {
           "type": "SYMBOL",
@@ -179,7 +179,7 @@
       "type": "PATTERN",
       "value": "-?\\d+"
     },
-    "string": {
+    "string_literal": {
       "type": "CHOICE",
       "members": [
         {

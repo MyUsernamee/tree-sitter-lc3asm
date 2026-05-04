@@ -68,14 +68,14 @@
           "named": true
         },
         {
-          "type": "string",
+          "type": "string_literal",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "string",
+    "type": "string_literal",
     "named": true,
     "fields": {}
   },
